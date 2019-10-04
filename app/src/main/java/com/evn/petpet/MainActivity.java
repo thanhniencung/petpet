@@ -20,6 +20,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     Map<String, String> pets = new HashMap<>();
     ProgressBar imageLoading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
