@@ -40,9 +40,8 @@ public class MainActivity extends BaseActivity {
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,
+                goTo(MainActivity.this,
                         SecondActivity.class);
-                startActivity(intent);
                 //handleGoClicked();
             }
         });
