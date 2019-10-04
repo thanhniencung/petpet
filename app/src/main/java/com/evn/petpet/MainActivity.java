@@ -3,6 +3,9 @@ package com.evn.petpet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -34,17 +37,46 @@ public class MainActivity extends AppCompatActivity {
 
         displayPetImage("dog");
 
+        ((EditText) findViewById(R.id.petName))
+                .addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        Object tag = findViewById(R.id.petName).getTag();
+                        if (tag == null) {
+                            return;
+                        }
+                        if (((Boolean) tag) == true) {
+                            findViewById(R.id.petName).setTag(false);
+                            findViewById(R.id.petName)
+                                    .setBackgroundResource(R.drawable.bg_edit_petname);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
         findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String petName = ((EditText) findViewById(R.id.petName)).getEditableText().toString();
                 if (petName.isEmpty()) {
+                    findViewById(R.id.petName).setTag(true);
                     Animation animShake =
                             AnimationUtils.loadAnimation(
                                     MainActivity.this,
                                     R.anim.shake);
                     findViewById(R.id.petName)
                             .startAnimation(animShake);
+                    findViewById(R.id.petName)
+                            .setBackgroundResource(R.drawable.bg_edit_petname_error);
                     return;
                 }
 
@@ -61,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
     void displayPetImage(String name) {
         String petImage = getPetImageByName(name);
+        if (petImage == null) {
+            return;
+        }
         if (petImage.isEmpty()) {
             return;
         }
