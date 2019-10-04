@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -37,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String petName = ((EditText) findViewById(R.id.petName)).getEditableText().toString();
                 if (petName.isEmpty()) {
+                    Animation animShake =
+                            AnimationUtils.loadAnimation(
+                                    MainActivity.this,
+                                    R.anim.shake);
+                    findViewById(R.id.petName)
+                            .startAnimation(animShake);
                     return;
                 }
 
