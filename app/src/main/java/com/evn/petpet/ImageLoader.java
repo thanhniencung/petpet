@@ -1,8 +1,6 @@
 package com.evn.petpet;
 
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;

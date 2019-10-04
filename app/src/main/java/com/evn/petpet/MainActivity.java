@@ -1,9 +1,7 @@
 package com.evn.petpet;
-// def
-// abc
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,13 +14,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     Map<String, String> pets = new HashMap<>();
 
     ProgressBar imageLoading;
@@ -33,10 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
-        initData();
 
         editPetName.addTextChangedListener(new MyTextWatcher() {
             @Override
@@ -48,21 +40,28 @@ public class MainActivity extends AppCompatActivity {
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleGoClicked();
+                Intent intent = new Intent(MainActivity.this,
+                        SecondActivity.class);
+                startActivity(intent);
+                //handleGoClicked();
             }
         });
     }
 
-    private void initView() {
+    @Override
+    int getViewId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    void initView() {
         imageLoading    = findViewById(R.id.imageLoading);
         editPetName     = findViewById(R.id.petName);
         btnGo           = findViewById(R.id.go);
         ivAnimal        = findViewById(R.id.petImage);
     }
 
-    /**
-     * KHoi tao du lieu khi mo activity nay
-     */
+    @Override
     void initData() {
         pets.put("dog", "https://images.squarespace-cdn.com/content/v1/5a7f26bf268b96210912ae2d/1522770168413-11SGHGU3890Z0Q2PW22P/ke17ZwdGBToddI8pDm48kLxnK526YWAH1qleWz-y7AFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVH33scGBZjC30S7EYewNF5iKKwhonf2ThqWWOBkLKnojuqYeU1KwPvsAK7Tx5ND4WE/cody_golden.jpg");
         pets.put("cat", "https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg");
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         displayPetImage("dog");
     }
+
 
     private void handleGoClicked() {
         String petName = editPetName.getEditableText().toString();
