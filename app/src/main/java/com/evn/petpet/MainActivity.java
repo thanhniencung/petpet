@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         ivAnimal        = findViewById(R.id.petImage);
     }
 
+    /**
+     * KHoi tao du lieu khi mo activity nay
+     */
     void initData() {
         pets.put("dog", "https://images.squarespace-cdn.com/content/v1/5a7f26bf268b96210912ae2d/1522770168413-11SGHGU3890Z0Q2PW22P/ke17ZwdGBToddI8pDm48kLxnK526YWAH1qleWz-y7AFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVH33scGBZjC30S7EYewNF5iKKwhonf2ThqWWOBkLKnojuqYeU1KwPvsAK7Tx5ND4WE/cody_golden.jpg");
         pets.put("cat", "https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg");
@@ -96,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @param name
+     */
     void displayPetImage(String name) {
         String petImage = getPetImageByName(name);
         if (petImage == null) {
@@ -121,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     String getPetImageByName(String name) {
         return pets.get(name);
     }
