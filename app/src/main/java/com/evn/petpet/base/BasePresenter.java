@@ -1,13 +1,13 @@
 package com.evn.petpet.base;
 
-public class MvpPresenter<T extends MvpView> {
+public class BasePresenter<T extends MvpView> {
     T view;
 
     public T getView() {
         return view;
     }
 
-    public void attachView(T view) {
+    public void setViewListener(T view) {
         this.view = view;
     }
 

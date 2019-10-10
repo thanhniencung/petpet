@@ -1,6 +1,8 @@
 package com.evn.petpet.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.evn.petpet.model.Home;
 import com.evn.petpet.model.Repo;
 import com.evn.petpet.mvpview.RepoView;
 import com.evn.petpet.network.EvnAPI;
@@ -25,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity implements RepoView  {
+public class MainActivity extends BaseActivity implements RepoView {
     Map<String, String> pets = new HashMap<>();
 
     ProgressBar imageLoading;
@@ -34,32 +37,6 @@ public class MainActivity extends BaseActivity implements RepoView  {
     ImageView   ivAnimal;
 
     RepoPresenter repoPresenter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        repoPresenter = new RepoPresenter();
-        repoPresenter.attachView(this);
-
-        editPetName.addTextChangedListener(new MyTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handlePetNameTyping();
-            }
-        });
-
-        btnGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goTo(MainActivity.this,
-                        SecondActivity.class);
-                //handleGoClicked();
-            }
-        });
-
-        repoPresenter.getRepos();
-    }
 
     @Override
     public int getViewId() {
@@ -81,6 +58,27 @@ public class MainActivity extends BaseActivity implements RepoView  {
         pets.put("rabbit", "https://assets.change.org/photos/4/nh/bb/HfNHbbpayJVOjKD-400x400-noPad.jpg?1530422195");
 
         displayPetImage("dog");
+
+        repoPresenter = new RepoPresenter();
+        repoPresenter.setViewListener(this);
+
+        editPetName.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                handlePetNameTyping();
+            }
+        });
+
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goTo(MainActivity.this,
+                        SecondActivity.class);
+                //handleGoClicked();
+            }
+        });
+
+        repoPresenter.getHome();
     }
 
 
@@ -153,6 +151,16 @@ public class MainActivity extends BaseActivity implements RepoView  {
     @Override
     public void onRepo(List<Repo> data) {
         String a = "";
+    }
+
+    @Override
+    public void onHome(Home home) {
+        btnGo.setText(home.message);
+    }
+
+    @Override
+    public void onError() {
+
     }
 
     @Override

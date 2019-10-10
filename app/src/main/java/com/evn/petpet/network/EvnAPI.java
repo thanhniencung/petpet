@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EvnAPI {
     static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl("http://10.173.26.177:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 

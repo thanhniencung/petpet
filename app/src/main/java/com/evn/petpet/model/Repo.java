@@ -1,5 +1,8 @@
 package com.evn.petpet.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Repo {
-    public String full_name;
+    @SerializedName("full_name")
+    public String fullName;
 }
