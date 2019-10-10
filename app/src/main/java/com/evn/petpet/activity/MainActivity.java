@@ -1,6 +1,5 @@
-package com.evn.petpet;
+package com.evn.petpet.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.evn.petpet.shared.ImageLoader;
+import com.evn.petpet.view.MyTextWatcher;
+import com.evn.petpet.R;
+import com.evn.petpet.base.BaseActivity;
 import com.squareup.picasso.Callback;
 
 import java.util.HashMap;
@@ -48,12 +49,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    int getViewId() {
+    public int getViewId() {
         return R.layout.activity_main;
     }
 
     @Override
-    void initView() {
+    public void initView() {
         imageLoading    = findViewById(R.id.imageLoading);
         editPetName     = findViewById(R.id.petName);
         btnGo           = findViewById(R.id.go);
@@ -61,7 +62,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    void initData() {
+    public void initData() {
         pets.put("dog", "https://images.squarespace-cdn.com/content/v1/5a7f26bf268b96210912ae2d/1522770168413-11SGHGU3890Z0Q2PW22P/ke17ZwdGBToddI8pDm48kLxnK526YWAH1qleWz-y7AFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVH33scGBZjC30S7EYewNF5iKKwhonf2ThqWWOBkLKnojuqYeU1KwPvsAK7Tx5ND4WE/cody_golden.jpg");
         pets.put("cat", "https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg");
         pets.put("rabbit", "https://assets.change.org/photos/4/nh/bb/HfNHbbpayJVOjKD-400x400-noPad.jpg?1530422195");

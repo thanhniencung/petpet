@@ -1,4 +1,4 @@
-package com.evn.petpet;
+package com.evn.petpet.view;
 
 import android.text.Editable;
 import android.text.TextWatcher;

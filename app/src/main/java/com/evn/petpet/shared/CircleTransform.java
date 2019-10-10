@@ -1,4 +1,4 @@
-package com.evn.petpet;
+package com.evn.petpet.shared;
 
 /*
  * Copyright 2014 Julian Shen

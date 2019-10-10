@@ -1,4 +1,4 @@
-package com.evn.petpet;
+package com.evn.petpet.base;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,9 +20,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
-    abstract int getViewId();
-    abstract void initView();
-    abstract void initData();
+    public abstract int getViewId();
+    public abstract void initView();
+    public abstract void initData();
 
     protected void goTo(Activity activity, Class target) {
         Intent intent = new Intent(activity,
