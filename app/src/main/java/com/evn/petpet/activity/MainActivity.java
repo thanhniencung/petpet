@@ -10,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.evn.petpet.model.Repo;
+import com.evn.petpet.mvpview.RepoView;
+import com.evn.petpet.network.EvnAPI;
+import com.evn.petpet.network.EvnResponse;
+import com.evn.petpet.presenter.RepoPresenter;
 import com.evn.petpet.shared.ImageLoader;
 import com.evn.petpet.view.MyTextWatcher;
 import com.evn.petpet.R;
@@ -17,9 +22,10 @@ import com.evn.petpet.base.BaseActivity;
 import com.squareup.picasso.Callback;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements RepoView  {
     Map<String, String> pets = new HashMap<>();
 
     ProgressBar imageLoading;
@@ -27,9 +33,14 @@ public class MainActivity extends BaseActivity {
     Button      btnGo;
     ImageView   ivAnimal;
 
+    RepoPresenter repoPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        repoPresenter = new RepoPresenter();
+        repoPresenter.attachView(this);
 
         editPetName.addTextChangedListener(new MyTextWatcher() {
             @Override
@@ -46,6 +57,8 @@ public class MainActivity extends BaseActivity {
                 //handleGoClicked();
             }
         });
+
+        repoPresenter.getRepos();
     }
 
     @Override
@@ -135,5 +148,17 @@ public class MainActivity extends BaseActivity {
      */
     String getPetImageByName(String name) {
         return pets.get(name);
+    }
+
+    @Override
+    public void onRepo(List<Repo> data) {
+        String a = "";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        repoPresenter.deAttachView();
     }
 }
