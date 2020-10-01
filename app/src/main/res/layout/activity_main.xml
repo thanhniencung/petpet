@@ -48,6 +48,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:text="Go"
+            android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:background="@drawable/btn_go_selector"
